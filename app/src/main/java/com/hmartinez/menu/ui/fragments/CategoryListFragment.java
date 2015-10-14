@@ -3,6 +3,7 @@ package com.hmartinez.menu.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,10 +24,8 @@ import java.util.List;
 public class CategoryListFragment extends Fragment{
 
     public static final String CATEGORIES = "categories";
-    private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
-    private CategoryAdapter mAdapter;
     private List<Category> categories = new ArrayList<>();
+    private int smallestScreenWidthDp;
 
     public static CategoryListFragment newInstance(ArrayList<Category> categories){
         CategoryListFragment fragment = new CategoryListFragment();
@@ -44,6 +43,8 @@ public class CategoryListFragment extends Fragment{
         if (arguments != null){
             categories = arguments.getParcelableArrayList(CATEGORIES);
         }
+
+        smallestScreenWidthDp = getResources().getConfiguration().smallestScreenWidthDp;
     }
 
     @Nullable
@@ -51,18 +52,20 @@ public class CategoryListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View viewRoot = inflater.inflate(R.layout.fragment_list, container, false);
-        mRecyclerView = (RecyclerView) viewRoot.findViewById(R.id.category_list);
+        RecyclerView mRecyclerView = (RecyclerView) viewRoot.findViewById(R.id.category_list);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager mLayoutManager;
+        if (smallestScreenWidthDp < 600) {
+            // use a linear layout manager
+            mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        } else{
+            mLayoutManager = new GridLayoutManager(getActivity(), 3);
+        }
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter =  new CategoryAdapter(getContext(), categories);
+        CategoryAdapter mAdapter = new CategoryAdapter(getContext(), categories);
         mRecyclerView.setAdapter(mAdapter);
         return viewRoot;
 

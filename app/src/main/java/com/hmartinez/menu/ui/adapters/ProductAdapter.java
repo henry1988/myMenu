@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hmartinez.menu.R;
-import com.hmartinez.menu.databinding.CategoryItemBinding;
 import com.hmartinez.menu.databinding.ProductItemBinding;
-import com.hmartinez.menu.model.Category;
 import com.hmartinez.menu.model.Product;
-import com.hmartinez.menu.view_model.CategoryViewModel;
+import com.hmartinez.menu.ui.fragments.ProductListFragment;
 import com.hmartinez.menu.view_model.ProductViewModel;
 
 import java.util.List;
@@ -24,12 +22,12 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private List<Product> products;
 
-    private Context mContext;
+    private ProductListFragment.OnItemSelectedListener itemSelectedListener;
 
 
 
-    public ProductAdapter(Context context, List<Product> products) {
-        this.mContext = context;
+    public ProductAdapter(ProductListFragment.OnItemSelectedListener listener, List<Product> products) {
+        this.itemSelectedListener = listener;
         this.products = products;
     }
 
@@ -45,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(ProductViewHolder viewHolder, int i) {
         Product product = products.get(i);
-        viewHolder.bind(new ProductViewModel(mContext , product));
+        viewHolder.bind(new ProductViewModel(product, itemSelectedListener));
     }
 
     @Override
