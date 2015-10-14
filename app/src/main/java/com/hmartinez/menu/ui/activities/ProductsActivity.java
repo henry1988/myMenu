@@ -75,7 +75,10 @@ public class ProductsActivity extends AppCompatActivity implements ProductListFr
         if (detailFragment == null) {
             ProductDetailFragment newFragment = ProductDetailFragment.newInstance(product);
 
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            transaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
             transaction.replace(R.id.fragment_container, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();

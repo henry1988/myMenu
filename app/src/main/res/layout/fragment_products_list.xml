@@ -53,7 +53,7 @@
                 android:title="@{category.name}"
                 app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:contentInsetStart="72dp"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

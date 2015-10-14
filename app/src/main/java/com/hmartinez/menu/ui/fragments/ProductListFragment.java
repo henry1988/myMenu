@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,7 @@ import com.hmartinez.menu.R;
 import com.hmartinez.menu.databinding.FragmentProductsListBinding;
 import com.hmartinez.menu.model.Category;
 import com.hmartinez.menu.model.Product;
-import com.hmartinez.menu.ui.adapters.CategoryAdapter;
 import com.hmartinez.menu.ui.adapters.ProductAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Category List Fragment
